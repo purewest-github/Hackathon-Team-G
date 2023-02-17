@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>test index</title>
+  </head>
+  <body>
+
+    <header>
+    {# ユーザー確認用 #}
+    <!-- ログアウト -->
+    <a href="{{ url_for('logout')}}">ログアウト</a>
+    {# タグ一覧画面 #}
+    <a href="{{ url_for('tags') }}">タグ一覧</a>
+    </header>
+
+    <h2>チャンネル作成確認用</h2>
+    <!-- チャンネル作成機能確認用フォーム -->
+    <form action="/" method="POST">
+        <label for="channel-title">チャンネル名:</label>
+        <input type="text" name="channel-title" placeholder="チャンネル名"><br>
+        <label for="channel-description">チャンネル概要:</label>
+        <input type="text" name="channel-description" placeholder="チャンネル概要"><br>
+        <label for="tag">タグ:</label>
+        <select name="tid" required>
+          <option value="" selected disabled>選択してください</option>
+        {% for tag in tags %}
+          <option value="{{ tag.id }}">{{ tag.name }}</option>
+        {% endfor %}
+        </select><br>
+        <input type="submit" value="作成">
+    </form>
+
+    <!-- チャンネル一覧表示確認用 -->
+    <h2>チャンネル一覧確認用/タグに紐付けられたチャンネル表示確認</h2>
+    <a href="{{ url_for('index')}}">チャンネル一覧表示</a>
+    <ul>
+    {% for channel in channels %}
+      <li>
+        <a href="{{ url_for('detail', cid=channel.id)}}">{{ channel.name }}</a>
+        <a href="{{ url_for('tag_channel', tid=channel.tid) }}">{{ tags | selectattr("id", "==", channel.tid) | map(attribute="name") | list | first }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+
+    {# タグに紐づけられたチャンネル表示確認用 #}
+    {% if tag_name %}
+    <h3>{{ tag_name }}</h3>
+    {% endif %}
+    <ul>
+      {% for tag_channel in tag_channels %}
+      <li><a href="{{ url_for('detail', cid=tag_channel.id)}}">{{ tag_channel.name }}</a></li>
+      {% endfor %}
+    </ul>
+
+    {# フラッシュメッセージ確認用 #}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </body>
+</html>

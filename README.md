@@ -1,1 +1,1 @@
-# Hackathon-Team-G
+# 【ハッカソン冬の陣】TeamG のチャットアプリです

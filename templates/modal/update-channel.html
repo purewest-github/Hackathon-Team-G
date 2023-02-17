@@ -1,0 +1,33 @@
+<div id="update-channel-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5>チャンネル変更</h5>
+      {#
+      画像挿入するか未定のためサンプルの画像埋め込み箇所はコメントアウト
+      <img 
+        src="#"
+      >
+      #}
+      <span class="modalClose" id="update-page-close-btn">×</span>
+    </div>
+    {#チャンネル名とチャンネル説明のモーダル#}
+    <form class="modal-body" action="/update_channel" method="POST">
+      {#チャネル名を登録#}
+      <input 
+        type="text"
+        placeholder="チャンネル名"
+        class="channel-form-input"
+        name="channel-title"
+      >
+      {#チャンネル説明を登録#}
+      <input 
+        type="text"
+        placeholder="チャンネルの説明"
+        class="channel-form-input"
+        name="channel-description"
+      >
+      <input type="hidden" name="cid" value="{{ channel.id }}">
+        <button>変更</button>
+    </form>
+  </div>
+</div>
