@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test detail</title>
+</head>
+<body>
+  <header>
+  {# ユーザー確認用 #}
+  <!-- ログアウト -->
+  <a href="{{ url_for('logout')}}">ログアウト</a>
+  {# タグ一覧画面 #}
+  <a href="{{ url_for('index') }}">ホーム画面へ</a>
+  </header>
+
+  <h2>[チャンネル]</h2>
+
+  <!-- チャンネル削除機能確認 -->
+  <h3>チャンネル削除確認用</h3>
+  <form action="/delete/{{ channel.id }}" method="GET">
+    <label for="delete">チャンネル削除:</label>
+    <input type="submit" value="削除">
+  </form>
+
+  {# タグ紐付け確認用フォーム #}
+  <h3>タグ紐付け確認用</h3>
+  <form action="/link_tag" method="POST">
+    <label for="tag-name">タグ名:</label>
+    <input type="text" name="tag_name" placeholder="タグ名">
+    <input type="hidden" name="cid" value="{{ channel.id }}">
+    <input type="submit" value="追加">
+  </form>
+
+  {# フラッシュメッセージ確認用 #}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  {# 編集後確認用 #}
+  <h3>チャンネル情報</h3>
+  <p>チャンネル名：{{ channel.name }}</p>
+  <p>チャンネル概要：{{ channel.abstract }}</p>
+
+  {# タグ確認用 #}
+  {% if channel_tags %}
+    {% for channel_tag in channel_tags %}
+      {% set cid = channel.id %}
+      <a href="{{ url_for('tag_channel', tid=channel_tag.id) }}">{{ channel_tag.name }}</a>
+      <form action="/delete_tag_link" method="POST">
+        <input type="hidden" name="cid" value="{{ cid }}">
+        <input type="hidden" name="tid" value="{{ channel_tag.id }}">
+        <button type="submit">X</button>
+      </form>
+    {% endfor %}
+  {% endif %}
+
+  <!-- チャンネル編集機能確認 -->
+  <h3>チャンネル編集機能</h3>
+  <form action="/update_channel" method="POST">
+    <label for="channel-title">新しいチャンネル名:</label>
+    <input
+      type="text"
+      placeholder="新しいチャンネル名"
+      name="channel-title"
+    />
+    <br>
+    <label for="channel-title">新しいチャンネル概要:</label>
+    <input
+      type="text"
+      placeholder="新しいチャンネル概要"
+      name="channel-description"
+    /><br>
+    <input type="hidden" name='cid' value="{{ channel.id }}"><br>
+    <input type="submit" value="編集">
+  </form>
+  <hr>
+
+  <!-- メッセージ一覧機能確認 -->
+  <h2>[メッセージ]</h2>
+  <h3>メッセージ一覧機能</h3>
+  {% if messages %}
+    {% for message in messages %}
+    <p>{{ message.user_name }}:{{ message.message }}</p>
+      <form action="/delete_message" method="POST">
+        <input type="hidden" name="message_id" value="{{ message.id }}">
+        <input type="hidden" name="channel_id" value="{{ channel.id }}">
+        <input type="submit" value="削除">
+      </form>
+    {% endfor %}
+  {% else %}
+    <p>まだメッセージがありません</p>
+  {% endif %}
+
+  {# メッセージ追加機能テスト用フォーム #}
+  <h3>メッセージ作成機能</h3>
+  <form action="/message" method="POST">
+    <label for="message">メッセージを入力してください:</label><br>
+    <input type="text" name="message">
+    <input type="hidden" name="channel_id" value="{{ channel.id }}">
+    <input type="submit" value="送信">
+  </form>
+</body>
+</html>

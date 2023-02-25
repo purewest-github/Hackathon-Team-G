@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>tags</title>
+{% endblock %}
+{% block body %}
+<div class="main-container tagpage">
+  <div class="tag-bg-img"></div>
+  <div class="main-content">
+    <div class="tag-title">
+      <h1>タグ一覧</h1>
+    </div>
+    <ul class="tag-box">
+      {% for tag in tags %}
+      <li><a href="{{ url_for('tag_channel', tid=tag.id) }}">{{ tag.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+{# <script type="text/javascript">
+  const tag_channel = JSON.parse('{{tag_channel|tojson }}')
+  const uid = JSON.parse('{{ uid|tojson }}');
+</script> #}
+{# paginationは実装できる時間がある場合 #}
+{# <script
+src="{{ url_for('static',filename='js/pagination.js') }}"
+type="text/javascript"
+></script> #}
+{% endblock %}

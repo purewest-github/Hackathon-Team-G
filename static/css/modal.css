@@ -1,0 +1,111 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: aliceblue;
+}
+
+.modal-content {
+  background-color: aliceblue;
+  margin: 20% auto;
+  width: 70%;
+  border-radius: 20px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  position: relative;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-header h1 {
+  margin: 1rem 0;
+}
+
+.modal-header {
+  background: #AFCD83;
+  padding: 3px 15px 3px 32px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.modal-header h5 span {
+  z-index: 4;
+}
+
+.modal-header > .modalClose {
+  font-size: 2rem;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+
+.modalClose:hover {
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+.channel-form-input {
+  width: 70%;
+  background-color: transparent;
+  border-bottom: 1px solid lightgray;
+  box-shadow: 0 10px 15px -12px aliceblue;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.channel-form-input::placeholder {
+  color: gray;
+}
+
+#bar {
+  height: 39px;
+  width: 32px;
+}
+
+.modal-body button {
+  background-color: #01B4EE;
+  color:aliceblue;
+  width: 200px;
+}
+
+.modal-body button:hover {
+  background-color: #0680a9;
+}
+
+@media screen and (max-width: 639px) {
+  .modal-content {
+    margin: 35% auto;
+  }
+}
+
+@media screen and (min-width: 640px) and (max-width: 1023px) {
+  .modal-content {
+    width: 95%;
+  }
+  .modal {
+    padding-left: 80px;
+  }
+}
