@@ -1,0 +1,136 @@
+.registration-wrapper {
+  margin: auto;
+}
+
+.registration-wrapper.signup {
+  background-color: aliceblue;
+}
+
+.registration-wrapper.login {
+  background-color: aliceblue;
+}
+
+.registration-main.login-main {
+  background-image: url("../img/login.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.registration-main.signup-main {
+  background-image: url("../img/sign_up.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.form {
+  width: 550px;
+  height: 100vh;
+}
+
+.registration-form {
+  width: 550px;
+  border-radius: 8px;
+  padding: 20px 40px;
+}
+
+.registration-title {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.inputContainer {
+  position: relative;
+  height: 45px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #dadce0;
+  border-radius: 7px;
+  font-size: 16px;
+  padding: 0 20px;
+  outline: none;
+  background-color: white;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+::placeholder {
+  color: transparent;
+}
+
+.label {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 0 4px;
+  color: black;
+  font-size: 16px;
+  transition: 0.5s;
+  z-index: 0;
+}
+
+.submitBtn {
+  display: block;
+  margin-left: auto;
+  padding: 15px 30px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 30px;
+}
+
+.submitBtn:hover {
+  background-color: rgb(56, 56, 56);
+  transform: translateY(-2px);
+}
+
+.input:focus + .label {
+  top: -1px;
+  left: 3px;
+  z-index: 10;
+  font-size: 12px;
+  font-weight: 600;
+  color: blue;
+}
+
+.input:focus {
+  border: 2px solid blue;
+}
+
+.input:not(:placeholder-shown) + .label {
+  top: -1px;
+  left: 3px;
+  z-index: 10;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.switch-register-mode {
+  color: rgb(37, 36, 36);
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.switch-register-mode:hover {
+  color: blue;
+}
+
+.flashes {
+  color: red;
+  background-color: yellow;
+  border: 3px solid red;
+}

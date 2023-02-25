@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Login</title>
+</head>
+<body>
+  {# ログイン機能の動作確認用フォーム #}
+  <h2>Login</h2>
+    <form action="/login" method="POST">
+      <label for="email">メールアドレス:</label>
+      <input type="email" placeholder="Email" name="email"/><br>
+      <label for="password">パスワード:</label>
+      <input type="password" placeholder="Password" name="password" /><br>
+      <button>LOG IN</button>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </form>
+    {# サインアップ画面リンク #}
+    <a href="{{ url_for('signup') }}">サインアップ画面へ</a>
+</body>
+</html>
